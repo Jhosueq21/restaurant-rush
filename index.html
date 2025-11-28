@@ -57,49 +57,50 @@
         }
 
         .auth-container {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    max-width: 380px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    text-align: center;
-}
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            max-width: 320px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: center;
+        }
 
         .auth-logo {
-            font-size: 48px;
+            font-size: 40px;
             margin-bottom: 5px;
         }
 
        .auth-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 28px;
-    color: var(--primary-orange);
-    margin-bottom: 8px;
-}
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            color: var(--primary-orange);
+            margin-bottom: 6px;
+        }
 
         .auth-subtitle {
             color: var(--neutral-600);
-            margin-bottom: 20px;
-            font-size: 13px;
+            margin-bottom: 15px;
+            font-size: 12px;
         }
 
         .auth-tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 30px;F.input-group {
+            gap: 8px;
+            margin-bottom: 20px;F.input-group {
         }
 
         .auth-tab {
             flex: 1;
-            padding: 12px;
+            padding: 10px;
             background: var(--neutral-100);
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 14px;
             transition: all 0.3s;
         }
 
@@ -117,24 +118,24 @@
         }
 
         .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     text-align: left;
 }
 
         .input-label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
             color: var(--neutral-600);
         }
 
         .input-field {
             width: 100%;
-            padding: 12px 16px;
+            padding: 10px 12px;
             border: 2px solid var(--neutral-100);
-            border-radius: 10px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 14px;
             transition: all 0.3s;
         }
 
@@ -143,118 +144,118 @@
             border-color: var(--primary-orange);
         }
 
-        .auth-button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--warning-yellow) 0%, var(--primary-orange) 100%);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
-        }
+     .auth-button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, var(--warning-yellow) 0%, var(--primary-orange) 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+}
 
-        .auth-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(232, 123, 53, 0.4);
-        }
+.auth-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(232, 123, 53, 0.4);
+}
 
-        .auth-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+.auth-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
-        .auth-error {
-            color: var(--danger-red);
-            font-size: 14px;
-            margin-top: 10px;
-            display: none;
-        }
+.auth-error {
+    color: var(--danger-red);
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
 
-        .auth-error.show {
-            display: block;
-        }
+.auth-error.show {
+    display: block;
+}
 
-        .tutorial-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1500;
-        }
+.tutorial-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1500;
+}
 
-        .tutorial-screen.active {
-            display: flex;
-        }
+.tutorial-screen.active {
+    display: flex;
+}
 
-        .tutorial-content {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 550px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
+.tutorial-content {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    max-width: 480px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
 
-        .tutorial-icon {
-            font-size: 60px;
-            margin-bottom: 15px;
-        }
+.tutorial-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
 
-        .tutorial-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 26px;
-            color: var(--primary-orange);
-            margin-bottom: 15px;
-        }
+.tutorial-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    color: var(--primary-orange);
+    margin-bottom: 12px;
+}
 
-        .tutorial-text {
-            font-size: 15px;
-            color: var(--neutral-600);
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
+.tutorial-text {
+    font-size: 13px;
+    color: var(--neutral-600);
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
 
-        .tutorial-list {
-            text-align: left;
-            margin: 15px 0;
-            padding-left: 20px;
-        }
+.tutorial-list {
+    text-align: left;
+    margin: 12px 0;
+    padding-left: 18px;
+}
 
-        .tutorial-list li {
-            margin-bottom: 10px;
-            font-size: 14px;
-            line-height: 1.4;
-        }}
+.tutorial-list li {
+    margin-bottom: 8px;
+    font-size: 12px;
+    line-height: 1.3;
+}
 
-        .tutorial-button {
-            background: linear-gradient(135deg, var(--success-green) 0%, var(--info-blue) 100%);
-            border: none;
-            padding: 16px 40px;
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-            border-radius: 12px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s;
-        }
+.tutorial-button {
+    background: linear-gradient(135deg, var(--success-green) 0%, var(--info-blue) 100%);
+    border: none;
+    padding: 12px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s;
+}
 
-        .tutorial-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(16, 163, 127, 0.4);
-        }
+.tutorial-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 163, 127, 0.4);
+}
 
         .page-wrapper {
             display: none;
@@ -304,16 +305,16 @@
             border-radius: 8px;
         }
 
-        .game-area {
-            flex: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            padding: 30px;
-            position: relative;
-        }
+       .game-area {
+    flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    padding: 20px;
+    position: relative;
+}
 
         .ad-banner-bottom {
             background: var(--neutral-100);
