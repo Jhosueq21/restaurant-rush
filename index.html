@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -38,12 +39,229 @@
             overflow-x: hidden;
         }
 
-        .page-wrapper {
+        .auth-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-cream) 0%, #E8D5C4 100%);
             display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .auth-screen.hidden {
+            display: none;
+        }
+
+        .auth-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .auth-logo {
+            font-size: 64px;
+            margin-bottom: 10px;
+        }
+
+        .auth-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            color: var(--primary-orange);
+            margin-bottom: 10px;
+        }
+
+        .auth-subtitle {
+            color: var(--neutral-600);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: var(--neutral-100);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--neutral-600);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--neutral-100);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--warning-yellow) 0%, var(--primary-orange) 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 123, 53, 0.4);
+        }
+
+        .auth-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .auth-error {
+            color: var(--danger-red);
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .auth-error.show {
+            display: block;
+        }
+
+        .tutorial-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1500;
+        }
+
+        .tutorial-screen.active {
+            display: flex;
+        }
+
+        .tutorial-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .tutorial-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .tutorial-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .tutorial-text {
+            font-size: 18px;
+            color: var(--neutral-600);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .tutorial-list {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .tutorial-list li {
+            margin-bottom: 12px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .tutorial-button {
+            background: linear-gradient(135deg, var(--success-green) 0%, var(--info-blue) 100%);
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .tutorial-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 163, 127, 0.4);
+        }
+
+        .page-wrapper {
+            display: none;
             flex-direction: column;
             min-height: 100vh;
             max-width: 1920px;
             margin: 0 auto;
+        }
+
+        .page-wrapper.active {
+            display: flex;
         }
 
         .ad-banner-top {
@@ -71,8 +289,7 @@
             margin-bottom: 20px;
         }
 
-        .ad-sidebar-left,
-        .ad-sidebar-right {
+        .ad-sidebar-left, .ad-sidebar-right {
             background: var(--neutral-100);
             width: 160px;
             min-height: 600px;
@@ -108,22 +325,43 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             padding-bottom: 20px;
             border-bottom: 3px solid var(--primary-cream);
         }
 
+        .game-title-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .game-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             color: var(--primary-orange);
             text-shadow: 2px 2px 0 var(--primary-cream);
         }
 
+        .logout-button {
+            background: var(--neutral-100);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .logout-button:hover {
+            background: var(--danger-red);
+            color: white;
+        }
+
         .game-stats {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
         }
 
@@ -141,74 +379,132 @@
             font-size: 20px;
         }
 
-        .level-progress {
-            margin-bottom: 30px;
-        }
-
-        .level-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--neutral-600);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 30px;
-            background: var(--neutral-100);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            border: 2px solid var(--primary-tan);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--success-green) 0%, var(--info-blue) 100%);
-            border-radius: 15px;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .game-play-area {
-            background: linear-gradient(135deg, var(--primary-cream) 0%, var(--neutral-50) 100%);
+        .restaurant-scene {
+            background: linear-gradient(to bottom, #87CEEB 0%, var(--primary-cream) 50%);
             border-radius: 20px;
-            padding: 40px;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid var(--primary-tan);
+            padding: 20px;
+            min-height: 300px;
+            margin-bottom: 20px;
             position: relative;
+            overflow: hidden;
+            border: 3px solid var(--primary-tan);
+        }
+
+        .restaurant-building {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 200px;
+            background: #D4A574;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .restaurant-door {
+            width: 80px;
+            height: 120px;
+            background: #8B4513;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+        }
+
+        .restaurant-window {
+            width: 60px;
+            height: 60px;
+            background: #ADD8E6;
+            border: 3px solid #8B4513;
+            border-radius: 5px;
+        }
+
+        .restaurant-sign {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-orange);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .customers-container {
+            position: absolute;
+            bottom: 220px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            pointer-events: none;
+        }
+
+        .customer {
+            position: absolute;
+            font-size: 48px;
+            animation: walkIn 3s ease-in-out infinite;
+        }
+
+        @keyframes walkIn {
+            0% {
+                left: -10%;
+                transform: scaleX(1);
+            }
+            48% {
+                transform: scaleX(1);
+            }
+            50% {
+                left: 50%;
+                transform: scaleX(-1);
+            }
+            98% {
+                transform: scaleX(-1);
+            }
+            100% {
+                left: 110%;
+                transform: scaleX(1);
+            }
+        }
+
+        .customer:nth-child(1) { animation-delay: 0s; bottom: 0; }
+        .customer:nth-child(2) { animation-delay: 1s; bottom: 20px; }
+        .customer:nth-child(3) { animation-delay: 2s; bottom: 10px; }
+
+        .control-panel {
+            background: var(--primary-cream);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
         }
 
         .timer-display {
             font-family: 'Poppins', sans-serif;
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 800;
             color: var(--primary-orange);
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 10px;
             text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
         }
 
         .timer-label {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--neutral-600);
-            margin-bottom: 30px;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         .serve-button {
+            width: 100%;
             background: linear-gradient(135deg, var(--warning-yellow) 0%, var(--primary-orange) 100%);
             border: none;
-            padding: 24px 60px;
-            font-size: 24px;
+            padding: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: white;
             border-radius: 16px;
@@ -218,12 +514,10 @@
             font-family: 'Poppins', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
         }
 
         .serve-button:hover {
-            transform: translateY(-4px) scale(1.05);
+            transform: translateY(-4px) scale(1.02);
             box-shadow: 0 12px 40px rgba(232, 123, 53, 0.6);
         }
 
@@ -240,8 +534,52 @@
         .lives-indicator {
             display: flex;
             gap: 10px;
-            margin-top: 30px;
+            justify-content: center;
+            margin-top: 20px;
             font-size: 32px;
+        }
+
+        .game-message {
+            text-align: center;
+            font-size: 18px;
+            color: var(--neutral-600);
+            margin-top: 15px;
+            min-height: 25px;
+            font-weight: 600;
+        }
+
+        .level-progress {
+            margin-bottom: 20px;
+        }
+
+        .level-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--neutral-600);
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: var(--neutral-100);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--primary-tan);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-green) 0%, var(--info-blue) 100%);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
         }
 
         .combo-display {
@@ -250,10 +588,10 @@
             right: 20px;
             background: linear-gradient(135deg, var(--danger-red) 0%, var(--warning-yellow) 100%);
             color: white;
-            padding: 16px 24px;
+            padding: 12px 20px;
             border-radius: 16px;
             font-weight: 800;
-            font-size: 24px;
+            font-size: 20px;
             box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
             display: none;
         }
@@ -268,12 +606,149 @@
             50% { transform: scale(1.1); }
         }
 
-        .game-message {
-            text-align: center;
+        .upgrades-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--success-green) 0%, var(--info-blue) 100%);
+            border: none;
+            border-radius: 50%;
+            font-size: 32px;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(16, 163, 127, 0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .upgrades-button:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        .upgrades-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .upgrades-screen.active {
+            display: flex;
+        }
+
+        .upgrades-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .upgrades-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .upgrades-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            color: var(--primary-orange);
+        }
+
+        .close-upgrades {
+            background: var(--neutral-100);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-upgrades:hover {
+            background: var(--danger-red);
+            color: white;
+        }
+
+        .upgrade-card {
+            background: var(--primary-cream);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 3px solid var(--primary-tan);
+        }
+
+        .upgrade-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .upgrade-name {
             font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-orange);
+        }
+
+        .upgrade-level {
+            background: var(--info-blue);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .upgrade-description {
             color: var(--neutral-600);
-            margin-top: 20px;
-            min-height: 30px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .upgrade-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .upgrade-cost {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--warning-yellow);
+        }
+
+        .buy-button {
+            background: linear-gradient(135deg, var(--success-green) 0%, var(--info-blue) 100%);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .buy-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .game-over-screen {
@@ -298,6 +773,7 @@
             padding: 40px;
             border-radius: 20px;
             max-width: 500px;
+            width: 90%;
             text-align: center;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
@@ -370,65 +846,132 @@
         }
 
         @media (max-width: 1200px) {
-            .ad-sidebar-left,
-            .ad-sidebar-right {
+            .ad-sidebar-left, .ad-sidebar-right {
                 display: none;
             }
         }
 
         @media (max-width: 768px) {
             .game-title {
-                font-size: 24px;
-            }
-
-            .game-stats {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .game-play-area {
-                padding: 20px;
-            }
-
-            .timer-display {
-                font-size: 36px;
-            }
-
-            .serve-button {
-                padding: 20px 40px;
                 font-size: 20px;
             }
-
-            .game-over-content {
-                margin: 20px;
-                padding: 30px;
+            .game-stats {
+                flex-wrap: wrap;
+                gap: 8px;
             }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .stat-item {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+            .timer-display {
+                font-size: 32px;
+            }
+            .serve-button {
+                font-size: 18px;
+                padding: 16px;
+            }
+            .upgrades-button {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .customer {
+                font-size: 36px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="page-wrapper">
-        <div class="ad-banner-top">
-            <div class="ad-placeholder">
-                [ Espacio para banner 728x90 ]
+<!-- PANTALLA DE LOGIN/REGISTRO -->
+    <div class="auth-screen" id="auth-screen">
+        <div class="auth-container">
+            <div class="auth-logo">🍽️</div>
+            <h1 class="auth-title">Restaurant Rush</h1>
+            <p class="auth-subtitle">Gestiona tu restaurante y sirve a tus clientes</p>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Iniciar Sesión</button>
+                <button class="auth-tab" onclick="switchTab('register')">Registrarse</button>
             </div>
+
+            <form class="auth-form active" id="login-form" onsubmit="return false;">
+                <div class="input-group">
+                    <label class="input-label">Email</label>
+                    <input type="email" class="input-field" id="login-email" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Contraseña</label>
+                    <input type="password" class="input-field" id="login-password" required>
+                </div>
+                <button class="auth-button" onclick="handleLogin()">Iniciar Sesión</button>
+                <div class="auth-error" id="login-error"></div>
+            </form>
+
+            <form class="auth-form" id="register-form" onsubmit="return false;">
+                <div class="input-group">
+                    <label class="input-label">Nombre de usuario</label>
+                    <input type="text" class="input-field" id="register-username" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Email</label>
+                    <input type="email" class="input-field" id="register-email" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Contraseña</label>
+                    <input type="password" class="input-field" id="register-password" required>
+                </div>
+                <button class="auth-button" onclick="handleRegister()">Crear Cuenta</button>
+                <div class="auth-error" id="register-error"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE TUTORIAL -->
+    <div class="tutorial-screen" id="tutorial-screen">
+        <div class="tutorial-content">
+            <div class="tutorial-icon">👨‍🍳</div>
+            <h2 class="tutorial-title">¡Bienvenido Chef!</h2>
+            <p class="tutorial-text">Eres el dueño de Restaurant Rush. Cada plato que sale de tu cocina <strong>necesita tu autorización personal</strong> antes de ser servido.</p>
+            
+            <ul class="tutorial-list">
+                <li>🍽️ <strong>Click en "SERVIR PLATO"</strong> antes de que se acabe el tiempo</li>
+                <li>⏰ <strong>Al inicio tienes 30 minutos</strong> por cliente</li>
+                <li>📈 <strong>Cada nivel reduce el tiempo</strong> (más difícil = más emocionante)</li>
+                <li>💰 <strong>Gana monedas</strong> y compra mejoras en la tienda ⚡</li>
+                <li>❤️ <strong>3 clientes insatisfechos</strong> = cierras el restaurante</li>
+                <li>🔥 <strong>Haz combos</strong> atendiendo sin errores para ganar más monedas</li>
+            </ul>
+
+            <p class="tutorial-text"><strong>Nivel 1:</strong> 10 clientes → <strong>Nivel 2:</strong> 15 clientes → <strong>Nivel 3:</strong> 20 clientes...</p>
+
+            <button class="tutorial-button" onclick="closeTutorial()">¡Comenzar a Cocinar! 🔥</button>
+        </div>
+    </div>
+
+    <!-- JUEGO PRINCIPAL -->
+    <div class="page-wrapper" id="page-wrapper">
+        <div class="ad-banner-top">
+            <div class="ad-placeholder">[ Espacio para banner 728x90 ]</div>
         </div>
 
         <div class="main-container">
             <div class="ad-sidebar-left">
-                <div class="ad-placeholder">
-                    [ 160x600 ]
-                </div>
+                <div class="ad-placeholder">[ 160x600 ]</div>
             </div>
 
             <div class="game-area">
                 <div class="game-header">
-                    <div class="game-title">🍽️ Restaurant Rush</div>
+                    <div class="game-title-area">
+                        <div class="game-title">🍽️ Restaurant Rush</div>
+                        <button class="logout-button" onclick="handleLogout()">Salir</button>
+                    </div>
                     <div class="game-stats">
+                        <div class="stat-item">
+                            <span class="stat-icon">👤</span>
+                            <span id="username-display">Usuario</span>
+                        </div>
                         <div class="stat-item">
                             <span class="stat-icon">🎯</span>
                             <span>Nivel <span id="level">1</span></span>
@@ -446,19 +989,32 @@
                         <span><span id="clients-served">0</span>/<span id="clients-needed">10</span> clientes</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" id="progress-bar" style="width: 0%">
-                            0%
-                        </div>
+                        <div class="progress-fill" id="progress-bar" style="width: 0%">0%</div>
                     </div>
                 </div>
 
-                <div class="game-play-area">
+                <div class="restaurant-scene">
                     <div class="combo-display" id="combo-display">
                         COMBO x<span id="combo-multiplier">1.0</span> 🔥
                     </div>
+                    
+                    <div class="customers-container">
+                        <div class="customer">🚶</div>
+                        <div class="customer">🚶‍♀️</div>
+                        <div class="customer">🚶‍♂️</div>
+                    </div>
+                    
+                    <div class="restaurant-building">
+                        <div class="restaurant-sign">🍽️ ABIERTO</div>
+                        <div class="restaurant-window"></div>
+                        <div class="restaurant-door"></div>
+                        <div class="restaurant-window"></div>
+                    </div>
+                </div>
 
+                <div class="control-panel">
                     <div class="timer-display" id="timer">30:00</div>
-                    <div class="timer-label">minutos restantes</div>
+                    <div class="timer-label">tiempo restante para servir</div>
 
                     <button class="serve-button" id="serve-button">
                         🍽️ SERVIR PLATO
@@ -473,19 +1029,29 @@
             </div>
 
             <div class="ad-sidebar-right">
-                <div class="ad-placeholder">
-                    [ 160x600 ]
-                </div>
+                <div class="ad-placeholder">[ 160x600 ]</div>
             </div>
         </div>
 
         <div class="ad-banner-bottom">
-            <div class="ad-placeholder">
-                [ Espacio para banner 728x90 ]
+            <div class="ad-placeholder">[ Espacio para banner 728x90 ]</div>
+        </div>
+
+        <button class="upgrades-button" onclick="openUpgrades()">⚡</button>
+    </div>
+
+    <!-- PANTALLA DE MEJORAS -->
+    <div class="upgrades-screen" id="upgrades-screen">
+        <div class="upgrades-content">
+            <div class="upgrades-header">
+                <h2 class="upgrades-title">⚡ Tienda de Mejoras</h2>
+                <button class="close-upgrades" onclick="closeUpgrades()">✕</button>
             </div>
+            <div id="upgrades-container"></div>
         </div>
     </div>
 
+    <!-- PANTALLA DE GAME OVER -->
     <div class="game-over-screen" id="game-over-screen">
         <div class="game-over-content">
             <div class="game-over-title">🏪 RESTAURANTE CERRADO</div>
@@ -524,8 +1090,11 @@
             </button>
         </div>
     </div>
-
     <script>
+        const SUPABASE_URL = 'https://lmqgimalxiwrevgdsujm.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxtcWdpbWFseGl3cmV2Z2RzdWptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQyNzk2NDksImV4cCI6MjA3OTg1NTY0OX0.qPAyvnt1pMiSJ_VhlhozIW5Fl8rp71zcQEivid2ABKM';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
         const GAME_CONFIG = {
             INITIAL_TIME: 1800,
             MIN_TIME: 30,
@@ -536,7 +1105,39 @@
             MAX_COOLDOWN: 1440
         };
 
+        const UPGRADES = {
+            extra_time: {
+                name: '⏰ Tiempo Extra',
+                description: '+5 minutos adicionales por cliente',
+                baseCost: 500,
+                maxLevel: 3,
+                effect: 300
+            },
+            extra_life: {
+                name: '💚 Segunda Oportunidad',
+                description: '+1 vida extra antes de Game Over',
+                baseCost: 1000,
+                maxLevel: 2,
+                effect: 1
+            },
+            double_coins: {
+                name: '💰 Propinas Dobles',
+                description: 'x2 monedas ganadas por cliente',
+                baseCost: 750,
+                maxLevel: 1,
+                effect: 2
+            },
+            patient_client: {
+                name: '😌 Cliente Paciente',
+                description: 'Los clientes esperan +10% más tiempo',
+                baseCost: 1200,
+                maxLevel: 3,
+                effect: 0.1
+            }
+        };
+
         let gameState = {
+            user: null,
             level: 1,
             clientsServed: 0,
             clientsNeeded: GAME_CONFIG.CLIENTS_PER_LEVEL,
@@ -549,10 +1150,15 @@
             isPlaying: false,
             timerInterval: null,
             totalPlayTime: 0,
-            sessionStartTime: null
+            sessionStartTime: null,
+            upgrades: {}
         };
 
         const elements = {
+            authScreen: document.getElementById('auth-screen'),
+            tutorialScreen: document.getElementById('tutorial-screen'),
+            pageWrapper: document.getElementById('page-wrapper'),
+            usernameDisplay: document.getElementById('username-display'),
             level: document.getElementById('level'),
             coins: document.getElementById('coins'),
             clientsServed: document.getElementById('clients-served'),
@@ -564,6 +1170,8 @@
             gameMessage: document.getElementById('game-message'),
             comboDisplay: document.getElementById('combo-display'),
             comboMultiplier: document.getElementById('combo-multiplier'),
+            upgradesScreen: document.getElementById('upgrades-screen'),
+            upgradesContainer: document.getElementById('upgrades-container'),
             gameOverScreen: document.getElementById('game-over-screen'),
             restartButton: document.getElementById('restart-button'),
             cooldownTimer: document.getElementById('cooldown-timer'),
@@ -572,6 +1180,116 @@
             finalCombo: document.getElementById('final-combo'),
             finalCoins: document.getElementById('final-coins')
         };
+
+        function switchTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.querySelectorAll('.auth-tab')[0].classList.add('active');
+                document.getElementById('login-form').classList.add('active');
+            } else {
+                document.querySelectorAll('.auth-tab')[1].classList.add('active');
+                document.getElementById('register-form').classList.add('active');
+            }
+        }
+
+        async function handleLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const errorDiv = document.getElementById('login-error');
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) throw error;
+
+                await loadUserData(data.user.id);
+                showGame();
+            } catch (error) {
+                errorDiv.textContent = 'Error: ' + error.message;
+                errorDiv.classList.add('show');
+            }
+        }
+
+        async function handleRegister() {
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const errorDiv = document.getElementById('register-error');
+
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password
+                });
+
+                if (error) throw error;
+
+                const { error: profileError } = await supabase
+                    .from('users')
+                    .insert([{
+                        id: data.user.id,
+                        username: username,
+                        total_coins: 0,
+                        best_level: 1,
+                        total_games: 0
+                    }]);
+
+                if (profileError) throw profileError;
+
+                await loadUserData(data.user.id);
+                showGame();
+            } catch (error) {
+                errorDiv.textContent = 'Error: ' + error.message;
+                errorDiv.classList.add('show');
+            }
+        }
+
+        async function handleLogout() {
+            await supabase.auth.signOut();
+            location.reload();
+        }
+
+        async function loadUserData(userId) {
+            const { data, error } = await supabase
+                .from('users')
+                .select('*')
+                .eq('id', userId)
+                .single();
+
+            if (data) {
+                gameState.user = data;
+                gameState.coins = data.total_coins;
+                elements.usernameDisplay.textContent = data.username;
+                elements.coins.textContent = data.total_coins;
+            }
+
+            const { data: upgrades } = await supabase
+                .from('upgrades')
+                .select('*')
+                .eq('user_id', userId);
+
+            if (upgrades) {
+                upgrades.forEach(upgrade => {
+                    gameState.upgrades[upgrade.upgrade_type] = upgrade.upgrade_level;
+                });
+            }
+        }
+
+        function showGame() {
+            elements.authScreen.classList.add('hidden');
+            elements.tutorialScreen.classList.add('active');
+        }
+
+        function closeTutorial() {
+            elements.tutorialScreen.classList.remove('active');
+            elements.pageWrapper.classList.add('active');
+            initGame();
+        }
 
         function initGame() {
             const cooldownEnd = localStorage.getItem('cooldownEnd');
@@ -583,25 +1301,28 @@
             }
 
             resetGame();
+            renderUpgrades();
             startRound();
         }
 
         function resetGame() {
-            gameState = {
-                level: 1,
-                clientsServed: 0,
-                clientsNeeded: GAME_CONFIG.CLIENTS_PER_LEVEL,
-                coins: 0,
-                errors: 0,
-                combo: 0,
-                maxCombo: 0,
-                timeRemaining: GAME_CONFIG.INITIAL_TIME,
-                currentTimeLimit: GAME_CONFIG.INITIAL_TIME,
-                isPlaying: true,
-                timerInterval: null,
-                totalPlayTime: 0,
-                sessionStartTime: Date.now()
-            };
+            const extraTime = (gameState.upgrades.extra_time || 0) * UPGRADES.extra_time.effect;
+            const extraLives = (gameState.upgrades.extra_life || 0) * UPGRADES.extra_life.effect;
+            const patientBonus = (gameState.upgrades.patient_client || 0) * UPGRADES.patient_client.effect;
+
+            gameState.level = 1;
+            gameState.clientsServed = 0;
+            gameState.clientsNeeded = GAME_CONFIG.CLIENTS_PER_LEVEL;
+            gameState.errors = 0;
+            gameState.combo = 0;
+            gameState.maxCombo = 0;
+            gameState.currentTimeLimit = Math.floor(GAME_CONFIG.INITIAL_TIME * (1 + patientBonus) + extraTime);
+            gameState.timeRemaining = gameState.currentTimeLimit;
+            gameState.isPlaying = true;
+            gameState.totalPlayTime = 0;
+            gameState.sessionStartTime = Date.now();
+
+            GAME_CONFIG.MAX_ERRORS = 3 + extraLives;
 
             updateUI();
         }
@@ -648,7 +1369,7 @@
 
         elements.serveButton.addEventListener('click', servePlate);
 
-        function servePlate() {
+        async function servePlate() {
             if (!gameState.isPlaying) return;
 
             clearInterval(gameState.timerInterval);
@@ -659,7 +1380,8 @@
             }
 
             const multiplier = getComboMultiplier();
-            const coinsEarned = Math.floor(GAME_CONFIG.COINS_PER_CLIENT * multiplier);
+            const coinMultiplier = gameState.upgrades.double_coins ? 2 : 1;
+            const coinsEarned = Math.floor(GAME_CONFIG.COINS_PER_CLIENT * multiplier * coinMultiplier);
             gameState.coins += coinsEarned;
 
             gameState.clientsServed++;
@@ -699,9 +1421,14 @@
             gameState.clientsServed = 0;
             gameState.clientsNeeded += 5;
             
-            gameState.currentTimeLimit = Math.max(
-                GAME_CONFIG.MIN_TIME,
-                GAME_CONFIG.INITIAL_TIME - (gameState.level - 1) * GAME_CONFIG.TIME_DECREASE_PER_LEVEL
+            const patientBonus = (gameState.upgrades.patient_client || 0) * UPGRADES.patient_client.effect;
+            const extraTime = (gameState.upgrades.extra_time || 0) * UPGRADES.extra_time.effect;
+            
+            gameState.currentTimeLimit = Math.floor(
+                Math.max(
+                    GAME_CONFIG.MIN_TIME,
+                    (GAME_CONFIG.INITIAL_TIME - (gameState.level - 1) * GAME_CONFIG.TIME_DECREASE_PER_LEVEL)
+                ) * (1 + patientBonus) + extraTime
             );
 
             showMessage(`¡NIVEL ${gameState.level}! 🎉`, 'success');
@@ -712,9 +1439,11 @@
             }, 1500);
         }
 
-        function gameOver() {
+        async function gameOver() {
             gameState.isPlaying = false;
             clearInterval(gameState.timerInterval);
+
+            await saveGameSession();
 
             const playTimeMinutes = gameState.totalPlayTime / 60;
             let cooldownMinutes = Math.floor((playTimeMinutes / 60) * 2);
@@ -725,6 +1454,28 @@
             localStorage.setItem('cooldownEnd', cooldownEnd.toString());
 
             showGameOver(false);
+        }
+
+        async function saveGameSession() {
+            await supabase
+                .from('users')
+                .update({
+                    total_coins: gameState.coins,
+                    best_level: Math.max(gameState.level, gameState.user.best_level),
+                    total_games: gameState.user.total_games + 1
+                })
+                .eq('id', gameState.user.id);
+
+            await supabase
+                .from('game_sessions')
+                .insert([{
+                    user_id: gameState.user.id,
+                    level_reached: gameState.level,
+                    clients_served: gameState.clientsServed,
+                    coins_earned: gameState.coins - gameState.user.total_coins,
+                    combo_max: gameState.maxCombo,
+                    play_time: gameState.totalPlayTime
+                }]);
         }
 
         function showGameOver(fromCooldown) {
@@ -813,7 +1564,88 @@
             }, 2000);
         }
 
-        window.addEventListener('load', initGame);
+        function openUpgrades() {
+            renderUpgrades();
+            elements.upgradesScreen.classList.add('active');
+        }
+
+        function closeUpgrades() {
+            elements.upgradesScreen.classList.remove('active');
+        }
+
+        function renderUpgrades() {
+            elements.upgradesContainer.innerHTML = '';
+
+            Object.keys(UPGRADES).forEach(key => {
+                const upgrade = UPGRADES[key];
+                const currentLevel = gameState.upgrades[key] || 0;
+                const nextLevel = currentLevel + 1;
+                const cost = upgrade.baseCost * nextLevel;
+                const canAfford = gameState.coins >= cost;
+                const maxed = currentLevel >= upgrade.maxLevel;
+
+                const card = document.createElement('div');
+                card.className = 'upgrade-card';
+                card.innerHTML = `
+                    <div class="upgrade-header">
+                        <div class="upgrade-name">${upgrade.name}</div>
+                        <div class="upgrade-level">Nivel ${currentLevel}/${upgrade.maxLevel}</div>
+                    </div>
+                    <div class="upgrade-description">${upgrade.description}</div>
+                    <div class="upgrade-footer">
+                        <div class="upgrade-cost">${maxed ? '✅ MÁXIMO' : `💰 ${cost}`}</div>
+                        ${!maxed ? `
+                            <button class="buy-button" ${!canAfford ? 'disabled' : ''} 
+                                onclick="buyUpgrade('${key}', ${cost})">
+                                ${canAfford ? 'Comprar' : 'Insuficiente'}
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+
+                elements.upgradesContainer.appendChild(card);
+            });
+        }
+
+        async function buyUpgrade(upgradeKey, cost) {
+            if (gameState.coins < cost) return;
+
+            gameState.coins -= cost;
+            gameState.upgrades[upgradeKey] = (gameState.upgrades[upgradeKey] || 0) + 1;
+
+            await supabase
+                .from('upgrades')
+                .upsert({
+                    user_id: gameState.user.id,
+                    upgrade_type: upgradeKey,
+                    upgrade_level: gameState.upgrades[upgradeKey]
+                });
+
+            await supabase
+                .from('users')
+                .update({ total_coins: gameState.coins })
+                .eq('id', gameState.user.id);
+
+            elements.coins.textContent = gameState.coins;
+            renderUpgrades();
+            showMessage('¡Mejora comprada! ⚡', 'success');
+        }
+
+        supabase.auth.onAuthStateChange((event, session) => {
+            if (session) {
+                loadUserData(session.user.id).then(() => {
+                    showGame();
+                });
+            }
+        });
+
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) {
+                loadUserData(session.user.id).then(() => {
+                    showGame();
+                });
+            }
+        });
     </script>
 </body>
 </html>
