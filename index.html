@@ -57,37 +57,39 @@
         }
 
         .auth-container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-        }
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    max-width: 380px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    text-align: center;
+}
 
         .auth-logo {
-            font-size: 64px;
-            margin-bottom: 10px;
+            font-size: 48px;
+            margin-bottom: 5px;
         }
 
-        .auth-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 36px;
-            color: var(--primary-orange);
-            margin-bottom: 10px;
-        }
+       .auth-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    color: var(--primary-orange);
+    margin-bottom: 8px;
+}
 
         .auth-subtitle {
             color: var(--neutral-600);
-            margin-bottom: 30px;
-            font-size: 14px;
+            margin-bottom: 20px;
+            font-size: 13px;
         }
 
         .auth-tabs {
             display: flex;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 30px;F.input-group {
         }
 
         .auth-tab {
@@ -115,9 +117,9 @@
         }
 
         .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
+    margin-bottom: 15px;
+    text-align: left;
+}
 
         .input-label {
             display: block;
@@ -195,44 +197,46 @@
 
         .tutorial-content {
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
-            max-width: 600px;
+            max-width: 550px;
             width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
             text-align: center;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
         .tutorial-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
+            font-size: 60px;
+            margin-bottom: 15px;
         }
 
         .tutorial-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 32px;
+            font-size: 26px;
             color: var(--primary-orange);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .tutorial-text {
-            font-size: 18px;
+            font-size: 15px;
             color: var(--neutral-600);
-            line-height: 1.6;
-            margin-bottom: 15px;
+            line-height: 1.5;
+            margin-bottom: 12px;
         }
 
         .tutorial-list {
             text-align: left;
-            margin: 20px 0;
+            margin: 15px 0;
             padding-left: 20px;
         }
 
         .tutorial-list li {
-            margin-bottom: 12px;
-            font-size: 16px;
-            line-height: 1.5;
-        }
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+        }}
 
         .tutorial-button {
             background: linear-gradient(135deg, var(--success-green) 0%, var(--info-blue) 100%);
@@ -256,7 +260,7 @@
             display: none;
             flex-direction: column;
             min-height: 100vh;
-            max-width: 1920px;
+            width: 100%;
             margin: 0 auto;
         }
 
@@ -435,45 +439,150 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .customers-container {
-            position: absolute;
-            bottom: 220px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            pointer-events: none;
-        }
+       .customers-container {
+    position: absolute;
+    bottom: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 150px;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
 
-        .customer {
-            position: absolute;
-            font-size: 48px;
-            animation: walkIn 3s ease-in-out infinite;
-        }
+.current-customer {
+    font-size: 64px;
+    animation: customerWaiting 1s ease-in-out;
+    text-align: center;
+}
 
-        @keyframes walkIn {
-            0% {
-                left: -10%;
-                transform: scaleX(1);
-            }
-            48% {
-                transform: scaleX(1);
-            }
-            50% {
-                left: 50%;
-                transform: scaleX(-1);
-            }
-            98% {
-                transform: scaleX(-1);
-            }
-            100% {
-                left: 110%;
-                transform: scaleX(1);
-            }
-        }
+.customer-bubble {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 24px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
 
-        .customer:nth-child(1) { animation-delay: 0s; bottom: 0; }
-        .customer:nth-child(2) { animation-delay: 1s; bottom: 20px; }
-        .customer:nth-child(3) { animation-delay: 2s; bottom: 10px; }
+@keyframes customerWaiting {
+    0% {
+        transform: translateX(-100px) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.customer-leaving {
+    animation: customerLeaving 0.8s ease-out forwards;
+}
+
+@keyframes customerLeaving {
+    0% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.customer-served {
+    animation: customerServed 0.8s ease-out forwards;
+}
+
+@keyframes customerServed {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-20px) scale(1.2);
+    }
+    100% {
+        transform: translateY(0) scale(0.5) translateX(-100px);
+        opacity: 0;
+    }
+}
+
+.upgrades-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 3px solid var(--primary-tan);
+}
+
+.upgrades-panel-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: var(--primary-orange);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upgrades-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.upgrade-mini-card {
+    background: var(--primary-cream);
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid var(--primary-tan);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.upgrade-mini-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.upgrade-mini-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.upgrade-mini-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.upgrade-mini-cost {
+    color: var(--warning-yellow);
+    font-weight: 700;
+}
+
+.upgrade-mini-level {
+    background: var(--info-blue);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+}
+
+@media (max-width: 768px) {
+    .upgrades-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
         .control-panel {
             background: var(--primary-cream);
@@ -998,10 +1107,8 @@
                         COMBO x<span id="combo-multiplier">1.0</span> 🔥
                     </div>
                     
-                    <div class="customers-container">
-                        <div class="customer">🚶</div>
-                        <div class="customer">🚶‍♀️</div>
-                        <div class="customer">🚶‍♂️</div>
+                    <div class="customers-container" id="customers-container">
+                       <!-- Cliente actual aparecerá aquí -->
                     </div>
                     
                     <div class="restaurant-building">
@@ -1009,6 +1116,16 @@
                         <div class="restaurant-window"></div>
                         <div class="restaurant-door"></div>
                         <div class="restaurant-window"></div>
+                    </div>
+                </div>
+
+                <!-- PANEL DE MEJORAS -->
+                <div class="upgrades-panel">
+                    <div class="upgrades-panel-title">
+                        ⚡ Mejoras Disponibles
+                    </div>
+                    <div class="upgrades-grid" id="upgrades-mini-grid">
+                        <!-- Las mejoras se cargarán aquí -->
                     </div>
                 </div>
 
@@ -1216,38 +1333,59 @@
         }
 
         async function handleRegister() {
-            const username = document.getElementById('register-username').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const errorDiv = document.getElementById('register-error');
+    const username = document.getElementById('register-username').value;
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+    const errorDiv = document.getElementById('register-error');
 
-            try {
-                const { data, error } = await supabase.auth.signUp({
-                    email: email,
-                    password: password
-                });
+    try {
+        const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password
+        });
 
-                if (error) throw error;
+        if (error) throw error;
 
-                const { error: profileError } = await supabase
-                    .from('users')
-                    .insert([{
-                        id: data.user.id,
-                        username: username,
-                        total_coins: 0,
-                        best_level: 1,
-                        total_games: 0
-                    }]);
+        // Mostrar mensaje de confirmación
+        errorDiv.style.color = 'var(--success-green)';
+        errorDiv.textContent = '✅ ¡Registro exitoso! Revisa tu email para confirmar tu cuenta.';
+        errorDiv.classList.add('show');
 
-                if (profileError) throw profileError;
+        // Crear perfil solo si el email no requiere confirmación
+        if (data.user) {
+            const { error: profileError } = await supabase
+                .from('users')
+                .insert([{
+                    id: data.user.id,
+                    username: username,
+                    total_coins: 0,
+                    best_level: 1,
+                    total_games: 0
+                }]);
 
-                await loadUserData(data.user.id);
-                showGame();
-            } catch (error) {
-                errorDiv.textContent = 'Error: ' + error.message;
-                errorDiv.classList.add('show');
+            // Si el perfil ya existe, ignorar el error
+            if (profileError && !profileError.message.includes('duplicate')) {
+                throw profileError;
             }
         }
+
+        // Limpiar formulario
+        document.getElementById('register-username').value = '';
+        document.getElementById('register-email').value = '';
+        document.getElementById('register-password').value = '';
+
+        // Cambiar a tab de login después de 3 segundos
+        setTimeout(() => {
+            switchTab('login');
+            errorDiv.classList.remove('show');
+        }, 3000);
+
+    } catch (error) {
+        errorDiv.style.color = 'var(--danger-red)';
+        errorDiv.textContent = 'Error: ' + error.message;
+        errorDiv.classList.add('show');
+    }
+}
 
         async function handleLogout() {
             await supabase.auth.signOut();
@@ -1291,19 +1429,20 @@
             initGame();
         }
 
-        function initGame() {
-            const cooldownEnd = localStorage.getItem('cooldownEnd');
-            const now = Date.now();
+       function initGame() {
+    const cooldownEnd = localStorage.getItem('cooldownEnd');
+    const now = Date.now();
 
-            if (cooldownEnd && now < parseInt(cooldownEnd)) {
-                showGameOver(true);
-                return;
-            }
+    if (cooldownEnd && now < parseInt(cooldownEnd)) {
+        showGameOver(true);
+        return;
+    }
 
-            resetGame();
-            renderUpgrades();
-            startRound();
-        }
+    resetGame();
+    renderUpgrades();
+    renderUpgradesMini();
+    startRound();
+}
 
         function resetGame() {
             const extraTime = (gameState.upgrades.extra_time || 0) * UPGRADES.extra_time.effect;
@@ -1328,13 +1467,30 @@
         }
 
         function startRound() {
-            gameState.isPlaying = true;
-            gameState.timeRemaining = gameState.currentTimeLimit;
-            
-            elements.serveButton.disabled = false;
-            updateTimer();
-            startTimer();
-        }
+    gameState.isPlaying = true;
+    gameState.timeRemaining = gameState.currentTimeLimit;
+    
+    elements.serveButton.disabled = false;
+    updateTimer();
+    startTimer();
+    showNewCustomer();
+}
+
+function showNewCustomer() {
+    const container = document.getElementById('customers-container');
+    const customers = ['👨', '👩', '🧑', '👴', '👵', '👦', '👧'];
+    const dishes = ['🍕', '🍔', '🍝', '🍜', '🍱', '🥗', '🍛'];
+    
+    const randomCustomer = customers[Math.floor(Math.random() * customers.length)];
+    const randomDish = dishes[Math.floor(Math.random() * dishes.length)];
+    
+    container.innerHTML = `
+        <div class="current-customer">
+            <div class="customer-bubble">${randomDish}</div>
+            ${randomCustomer}
+        </div>
+    `;
+}
 
         function startTimer() {
             if (gameState.timerInterval) {
@@ -1369,52 +1525,71 @@
 
         elements.serveButton.addEventListener('click', servePlate);
 
-        async function servePlate() {
-            if (!gameState.isPlaying) return;
+       async function servePlate() {
+    if (!gameState.isPlaying) return;
 
-            clearInterval(gameState.timerInterval);
+    clearInterval(gameState.timerInterval);
 
-            gameState.combo++;
-            if (gameState.combo > gameState.maxCombo) {
-                gameState.maxCombo = gameState.combo;
-            }
+    // Animación cliente feliz
+    const container = document.getElementById('customers-container');
+    const customer = container.querySelector('.current-customer');
+    if (customer) {
+        customer.classList.add('customer-served');
+    }
 
-            const multiplier = getComboMultiplier();
-            const coinMultiplier = gameState.upgrades.double_coins ? 2 : 1;
-            const coinsEarned = Math.floor(GAME_CONFIG.COINS_PER_CLIENT * multiplier * coinMultiplier);
-            gameState.coins += coinsEarned;
+    gameState.combo++;
+    if (gameState.combo > gameState.maxCombo) {
+        gameState.maxCombo = gameState.combo;
+    }
 
-            gameState.clientsServed++;
+    const multiplier = getComboMultiplier();
+    const coinMultiplier = gameState.upgrades.double_coins ? 2 : 1;
+    const coinsEarned = Math.floor(GAME_CONFIG.COINS_PER_CLIENT * multiplier * coinMultiplier);
+    gameState.coins += coinsEarned;
 
-            showMessage(`+${coinsEarned} monedas! 🎉`, 'success');
+    gameState.clientsServed++;
 
-            updateUI();
+    showMessage(`+${coinsEarned} monedas! 🎉`, 'success');
 
-            if (gameState.clientsServed >= gameState.clientsNeeded) {
-                levelUp();
-            } else {
-                startRound();
-            }
+    updateUI();
+
+    setTimeout(() => {
+        if (gameState.clientsServed >= gameState.clientsNeeded) {
+            levelUp();
+        } else {
+            startRound();
         }
+    }, 800);
+}
 
-        function clientLeft() {
-            clearInterval(gameState.timerInterval);
+       function clientLeft() {
+    clearInterval(gameState.timerInterval);
 
-            gameState.errors++;
-            gameState.combo = 0;
+    // Animación cliente enojado
+    const container = document.getElementById('customers-container');
+    const customer = container.querySelector('.current-customer');
+    if (customer) {
+        // Cambiar a emoji enojado
+        const bubble = customer.querySelector('.customer-bubble');
+        if (bubble) bubble.textContent = '😠';
+        customer.classList.add('customer-leaving');
+    }
 
-            updateLives();
+    gameState.errors++;
+    gameState.combo = 0;
 
-            showMessage('¡Cliente insatisfecho! 😠', 'error');
+    updateLives();
 
-            if (gameState.errors >= GAME_CONFIG.MAX_ERRORS) {
-                gameOver();
-            } else {
-                setTimeout(() => {
-                    startRound();
-                }, 1500);
-            }
+    showMessage('¡Cliente insatisfecho! 😠', 'error');
+
+    setTimeout(() => {
+        if (gameState.errors >= GAME_CONFIG.MAX_ERRORS) {
+            gameOver();
+        } else {
+            startRound();
         }
+    }, 1500);
+}
 
         function levelUp() {
             gameState.level++;
@@ -1607,6 +1782,42 @@
             });
         }
 
+        function renderUpgradesMini() {
+    const container = document.getElementById('upgrades-mini-grid');
+    if (!container) return;
+    
+    container.innerHTML = '';
+
+    Object.keys(UPGRADES).forEach(key => {
+        const upgrade = UPGRADES[key];
+        const currentLevel = gameState.upgrades[key] || 0;
+        const nextLevel = currentLevel + 1;
+        const cost = upgrade.baseCost * nextLevel;
+        const canAfford = gameState.coins >= cost;
+        const maxed = currentLevel >= upgrade.maxLevel;
+
+        const card = document.createElement('div');
+        card.className = 'upgrade-mini-card';
+        if (!maxed && canAfford) {
+            card.style.cursor = 'pointer';
+            card.onclick = () => buyUpgrade(key, cost);
+        } else {
+            card.style.opacity = '0.6';
+            card.style.cursor = 'not-allowed';
+        }
+
+        card.innerHTML = `
+            <div class="upgrade-mini-name">${upgrade.name}</div>
+            <div class="upgrade-mini-info">
+                <span class="upgrade-mini-cost">${maxed ? '✅ MAX' : `💰 ${cost}`}</span>
+                <span class="upgrade-mini-level">Nv ${currentLevel}/${upgrade.maxLevel}</span>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
         async function buyUpgrade(upgradeKey, cost) {
             if (gameState.coins < cost) return;
 
@@ -1628,8 +1839,9 @@
 
             elements.coins.textContent = gameState.coins;
             renderUpgrades();
+            renderUpgradesMini();
             showMessage('¡Mejora comprada! ⚡', 'success');
-        }
+         }
 
         supabase.auth.onAuthStateChange((event, session) => {
             if (session) {
