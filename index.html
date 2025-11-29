@@ -270,13 +270,7 @@
         }
 
         .ad-banner-top {
-            background: var(--neutral-100);
-            min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 2px solid var(--primary-tan);
-            margin-bottom: 20px;
+            display: none;
         }
 
         .ad-placeholder {
@@ -294,16 +288,9 @@
             margin-bottom: 20px;
         }
 
-        .ad-sidebar-left, .ad-sidebar-right {
-            background: var(--neutral-100);
-            width: 160px;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--primary-tan);
-            border-radius: 8px;
-        }
+            .ad-sidebar-left, .ad-sidebar-right {
+                display: none;
+            }
 
        .game-area {
     flex: 1;
@@ -317,13 +304,7 @@
 }
 
         .ad-banner-bottom {
-            background: var(--neutral-100);
-            min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-top: 2px solid var(--primary-tan);
-            margin-top: 20px;
+            display: none;
         }
 
         .game-header {
@@ -386,67 +367,159 @@
 
         .restaurant-scene {
             background: linear-gradient(to bottom, #87CEEB 0%, var(--primary-cream) 50%);
-            border-radius: 20px;
-            padding: 20px;
-            min-height: 300px;
-            margin-bottom: 20px;
+            border-radius: 16px;
+            padding: 15px;
+            min-height: 220px;
+            margin-bottom: 15px;
             position: relative;
             overflow: hidden;
             border: 3px solid var(--primary-tan);
         }
 
-        .restaurant-building {
+     .restaurant-building {
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
-            height: 200px;
+            height: 150px;
             background: #D4A574;
             border-radius: 10px 10px 0 0;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
         }
 
         .restaurant-door {
-            width: 80px;
-            height: 120px;
+            width: 60px;
+            height: 90px;
             background: #8B4513;
-            border-radius: 10px 10px 0 0;
+            border-radius: 8px 8px 0 0;
             position: relative;
         }
 
         .restaurant-window {
-            width: 60px;
-            height: 60px;
+            width: 45px;
+            height: 45px;
             background: #ADD8E6;
-            border: 3px solid #8B4513;
+            border: 2px solid #8B4513;
             border-radius: 5px;
         }
 
         .restaurant-sign {
             position: absolute;
-            top: -40px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--primary-orange);
             color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 8px 16px;
+            border-radius: 8px;
             font-weight: 800;
-            font-size: 18px;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }.restaurant-scene {
+            background: linear-gradient(to bottom, #87CEEB 0%, #D2B48C 60%, #8B7355 100%);
+            border-radius: 16px;
+            padding: 15px;
+            min-height: 220px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--primary-tan);
+        }
+
+        .restaurant-interior {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: #F5DEB3;
+            border-top: 4px solid #8B4513;
+        }
+
+        .reception-counter {
+            position: absolute;
+            bottom: 40px;
+            right: 20%;
+            width: 120px;
+            height: 60px;
+            background: linear-gradient(to bottom, #8B4513 0%, #654321 100%);
+            border-radius: 8px 8px 0 0;
+            border: 3px solid #654321;
+        }
+
+        .counter-top {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 130px;
+            height: 15px;
+            background: #D4A574;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .entrance-door {
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80px;
+            height: 120px;
+            background: linear-gradient(to right, #654321 0%, #8B4513 50%, #654321 100%);
+            border: 3px solid #4A3020;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .door-handle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            background: #FFD700;
+            border-radius: 50%;
+        }
+
+        .floor-tiles {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: repeating-linear-gradient(
+                90deg,
+                #DEB887 0px,
+                #DEB887 40px,
+                #D2B48C 40px,
+                #D2B48C 80px
+            );
+        }
+
+        .restaurant-sign {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-orange);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 14px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
        .customers-container {
     position: absolute;
-    bottom: 220px;
+    bottom: 160px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    height: 150px;
+    width: 150px;
+    height: 100px;
     pointer-events: none;
     display: flex;
     align-items: flex-end;
@@ -454,20 +527,20 @@
 }
 
 .current-customer {
-    font-size: 64px;
+    font-size: 48px;
     animation: customerWaiting 1s ease-in-out;
     text-align: center;
 }
 
 .customer-bubble {
     position: absolute;
-    top: -30px;
+    top: -25px;
     left: 50%;
     transform: translateX(-50%);
     background: white;
-    padding: 5px 12px;
-    border-radius: 10px;
-    font-size: 24px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
@@ -1103,48 +1176,27 @@
                     </div>
                 </div>
 
-                <div class="restaurant-scene">
+             <div class="restaurant-scene">
                     <div class="combo-display" id="combo-display">
                         COMBO x<span id="combo-multiplier">1.0</span> 🔥
                     </div>
+                    
+                    <div class="restaurant-sign">🍽️ Restaurant Rush</div>
                     
                     <div class="customers-container" id="customers-container">
                        <!-- Cliente actual aparecerá aquí -->
                     </div>
                     
-                    <div class="restaurant-building">
-                        <div class="restaurant-sign">🍽️ ABIERTO</div>
-                        <div class="restaurant-window"></div>
-                        <div class="restaurant-door"></div>
-                        <div class="restaurant-window"></div>
+                    <div class="restaurant-interior">
+                        <div class="floor-tiles"></div>
+                        <div class="entrance-door">
+                            <div class="door-handle"></div>
+                        </div>
+                        <div class="reception-counter">
+                            <div class="counter-top"></div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- PANEL DE MEJORAS -->
-                <div class="upgrades-panel">
-                    <div class="upgrades-panel-title">
-                        ⚡ Mejoras Disponibles
-                    </div>
-                    <div class="upgrades-grid" id="upgrades-mini-grid">
-                        <!-- Las mejoras se cargarán aquí -->
-                    </div>
-                </div>
-
-                <div class="control-panel">
-                    <div class="timer-display" id="timer">30:00</div>
-                    <div class="timer-label">tiempo restante para servir</div>
-
-                    <button class="serve-button" id="serve-button">
-                        🍽️ SERVIR PLATO
-                    </button>
-
-                    <div class="lives-indicator" id="lives">
-                        😊 😊 😊
-                    </div>
-
-                    <div class="game-message" id="game-message"></div>
-                </div>
-            </div>
 
             <div class="ad-sidebar-right">
                 <div class="ad-placeholder">[ 160x600 ]</div>
@@ -1326,7 +1378,7 @@
                 if (error) throw error;
 
                 await loadUserData(data.user.id);
-                showGame();
+                showGame(false); // No mostrar tutorial en login
             } catch (error) {
                 errorDiv.textContent = 'Error: ' + error.message;
                 errorDiv.classList.add('show');
@@ -1375,9 +1427,10 @@
         document.getElementById('register-email').value = '';
         document.getElementById('register-password').value = '';
 
-        // Cambiar a tab de login después de 3 segundos
         setTimeout(() => {
-            switchTab('login');
+            // Después de registro exitoso, mostrar tutorial
+            elements.authScreen.classList.add('hidden');
+            elements.tutorialScreen.classList.add('active');
             errorDiv.classList.remove('show');
         }, 3000);
 
@@ -1419,9 +1472,15 @@
             }
         }
 
-        function showGame() {
+        function showGame(showTutorial = false) {
             elements.authScreen.classList.add('hidden');
-            elements.tutorialScreen.classList.add('active');
+            
+            if (showTutorial) {
+                elements.tutorialScreen.classList.add('active');
+            } else {
+                elements.pageWrapper.classList.add('active');
+                initGame();
+            }
         }
 
         function closeTutorial() {
@@ -1630,6 +1689,24 @@ function showNewCustomer() {
             localStorage.setItem('cooldownEnd', cooldownEnd.toString());
 
             showGameOver(false);
+
+            async function gameOver() {
+            gameState.isPlaying = false;
+            clearInterval(gameState.timerInterval);
+
+            await saveGameSession();
+
+            const playTimeMinutes = gameState.totalPlayTime / 60;
+            let cooldownMinutes = Math.floor((playTimeMinutes / 60) * 2);
+            cooldownMinutes = Math.min(cooldownMinutes, GAME_CONFIG.MAX_COOLDOWN);
+            cooldownMinutes = Math.max(cooldownMinutes, 1);
+
+            const cooldownEnd = Date.now() + (cooldownMinutes * 60 * 1000);
+            localStorage.setItem('cooldownEnd', cooldownEnd.toString());
+            localStorage.setItem('showTutorialAfterCooldown', 'true'); // Marcar para mostrar tutorial
+
+            showGameOver(false);
+        }
         }
 
         async function saveGameSession() {
@@ -1687,8 +1764,16 @@ function showNewCustomer() {
 
         elements.restartButton.addEventListener('click', () => {
             localStorage.removeItem('cooldownEnd');
+            const showTutorial = localStorage.getItem('showTutorialAfterCooldown') === 'true';
+            localStorage.removeItem('showTutorialAfterCooldown');
+            
             elements.gameOverScreen.classList.remove('active');
-            initGame();
+            
+            if (showTutorial) {
+                elements.tutorialScreen.classList.add('active');
+            } else {
+                initGame();
+            }
         });
 
         function updateUI() {
@@ -1847,7 +1932,7 @@ function showNewCustomer() {
         supabase.auth.onAuthStateChange((event, session) => {
             if (session) {
                 loadUserData(session.user.id).then(() => {
-                    showGame();
+                    showGame(false); // No mostrar tutorial
                 });
             }
         });
@@ -1855,7 +1940,7 @@ function showNewCustomer() {
         supabase.auth.getSession().then(({ data: { session } }) => {
             if (session) {
                 loadUserData(session.user.id).then(() => {
-                    showGame();
+                    showGame(false); // No mostrar tutorial
                 });
             }
         });
