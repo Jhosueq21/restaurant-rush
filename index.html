@@ -327,6 +327,45 @@
     border-bottom: 2px solid var(--primary-cream);
 }
 
+.game-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-cream);
+}
+
+.game-stats-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.game-stats {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.stat-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary-cream);
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 13px;
+    border: 2px solid var(--primary-tan);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    white-space: nowrap;
+}
+
+.stat-icon {
+    font-size: 18px;
+}
+
 .game-title-area {
     display: flex;
     align-items: center;
@@ -711,11 +750,41 @@
     }
     
     .upgrades-button {
-        bottom: 20px;
-        right: 20px;
-        padding: 10px 16px;
-        font-size: 14px;
-    }
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, var(--success-green) 0%, var(--info-blue) 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(16, 163, 127, 0.4);
+    transition: all 0.3s;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.upgrades-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(16, 163, 127, 0.6);
+}
+
+.upgrades-button-icon {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.upgrades-button-text {
+    font-size: 16px;
+    line-height: 1;
+}
     
     .upgrades-button span:first-child {
         font-size: 18px;
@@ -1434,8 +1503,8 @@
         </div>
 
      <button class="upgrades-button" onclick="openUpgrades()">
-    <span style="font-size: 20px;">⚡</span>
-    <span>Mejoras</span>
+    <span class="upgrades-button-icon">⚡</span>
+    <span class="upgrades-button-text">Mejoras</span>
 </button>
     </div>
 
@@ -1770,6 +1839,8 @@
 
 function showNewCustomer() {
     const container = document.getElementById('customers-container');
+    if (!container) return;
+    
     const customers = ['👨', '👩', '🧑', '👴', '👵', '👦', '👧'];
     const dishes = ['🍕', '🍔', '🍝', '🍜', '🍱', '🥗', '🍛'];
     
@@ -1783,37 +1854,40 @@ function showNewCustomer() {
         </div>
     `;
 }
+       function startTimer() {
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+    }
 
-        function startTimer() {
-            if (gameState.timerInterval) {
-                clearInterval(gameState.timerInterval);
-            }
+    gameState.timerInterval = setInterval(() => {
+        gameState.timeRemaining--;
+        gameState.totalPlayTime++;
 
-            gameState.timerInterval = setInterval(() => {
-                gameState.timeRemaining--;
-                gameState.totalPlayTime++;
+        updateTimer();
 
-                updateTimer();
-
-                if (gameState.timeRemaining <= 0) {
-                    clientLeft();
-                }
-            }, 1000);
+        if (gameState.timeRemaining <= 0) {
+            clientLeft();
         }
+    }, 1000);
+}
 
         function updateTimer() {
-            const minutes = Math.floor(gameState.timeRemaining / 60);
-            const seconds = gameState.timeRemaining % 60;
-            elements.timer.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    const minutes = Math.floor(gameState.timeRemaining / 60);
+    const seconds = gameState.timeRemaining % 60;
+    const timerElement = document.getElementById('timer');
+    
+    if (timerElement) {
+        timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
-            if (gameState.timeRemaining < 300) {
-                elements.timer.style.color = 'var(--danger-red)';
-            } else if (gameState.timeRemaining < 900) {
-                elements.timer.style.color = 'var(--warning-yellow)';
-            } else {
-                elements.timer.style.color = 'var(--primary-orange)';
-            }
+        if (gameState.timeRemaining < 300) {
+            timerElement.style.color = 'var(--danger-red)';
+        } else if (gameState.timeRemaining < 900) {
+            timerElement.style.color = 'var(--warning-yellow)';
+        } else {
+            timerElement.style.color = 'var(--primary-orange)';
         }
+    }
+}
 
         elements.serveButton.addEventListener('click', servePlate);
 
