@@ -599,8 +599,8 @@
 .upgrades-panel {
     background: white;
     border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
     border: 3px solid var(--primary-tan);
 }
 
@@ -616,17 +616,18 @@
 
 .upgrades-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
 }
 
 .upgrade-mini-card {
     background: var(--primary-cream);
-    padding: 12px;
-    border-radius: 12px;
+    padding: 10px;
+    border-radius: 10px;
     border: 2px solid var(--primary-tan);
     cursor: pointer;
     transition: all 0.3s;
+    text-align: center;
 }
 
 .upgrade-mini-card:hover {
@@ -635,34 +636,44 @@
 }
 
 .upgrade-mini-name {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     margin-bottom: 5px;
 }
-
 .upgrade-mini-info {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 11px;
 }
 
 .upgrade-mini-cost {
     color: var(--warning-yellow);
     font-weight: 700;
+    font-size: 12px;
 }
 
 .upgrade-mini-level {
     background: var(--info-blue);
     color: white;
-    padding: 2px 8px;
+    padding: 2px 6px;
     border-radius: 6px;
-    font-size: 11px;
+    font-size: 10px;
+    display: inline-block;
 }
 
 @media (max-width: 768px) {
     .upgrades-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+    
+    .upgrade-mini-card {
+        padding: 8px;
+    }
+    
+    .upgrade-mini-name {
+        font-size: 12px;
     }
 }
 
@@ -1271,118 +1282,6 @@
             <div class="ad-sidebar-left">
                 <div class="ad-placeholder">[ 160x600 ]</div>
             </div>
-
-            <div class="game-area">
-                <div class="game-area">
-                <div class="game-header">
-                    <div class="game-title-area">
-                        <div class="game-title">🍽️ Restaurant Rush</div>
-                        <button class="logout-button" onclick="handleLogout()">Salir</button>
-                    </div>
-                    <div class="game-stats">
-                        <div class="stat-item">
-                            <span class="stat-icon">👤</span>
-                            <span id="username-display">Usuario</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-icon">🎯</span>
-                            <span>Nivel <span id="level">1</span></span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-icon">💰</span>
-                            <span id="coins">0</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="level-progress">
-                    <div class="level-info">
-                        <span>Progreso del nivel</span>
-                        <span><span id="clients-served">0</span>/<span id="clients-needed">10</span> clientes</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-bar" style="width: 0%">0%</div>
-                    </div>
-                </div>
-
-                <div class="restaurant-scene">
-                    <div class="combo-display" id="combo-display">
-                        COMBO x<span id="combo-multiplier">1.0</span> 🔥
-                    </div>
-                    
-                    <div class="restaurant-sign">🍽️ Restaurant Rush</div>
-                    
-                    <div class="customers-container" id="customers-container">
-                       <!-- Cliente actual aparecerá aquí -->
-                    </div>
-                    
-                    <div class="restaurant-interior">
-                        <div class="floor-tiles"></div>
-                        <div class="entrance-door">
-                            <div class="door-handle"></div>
-                        </div>
-                        <div class="reception-counter">
-                            <div class="counter-top"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="upgrades-panel">
-                    <div class="upgrades-panel-title">
-                        ⚡ Mejoras Disponibles
-                    </div>
-                    <div class="upgrades-grid" id="upgrades-mini-grid">
-                        <!-- Las mejoras se cargarán aquí -->
-                    </div>
-                </div>
-
-                <div class="control-panel">
-                    <div class="timer-display" id="timer">30:00</div>
-                    <div class="timer-label">tiempo restante para servir</div>
-
-                    <button class="serve-button" id="serve-button">
-                        🍽️ SERVIR PLATO
-                    </button>
-
-                    <div class="lives-indicator" id="lives">
-                        😊 😊 😊
-                    </div>
-
-                    <div class="game-message" id="game-message"></div>
-                </div>
-            </div>
-
-                <div class="level-progress">
-                    <div class="level-info">
-                        <span>Progreso del nivel</span>
-                        <span><span id="clients-served">0</span>/<span id="clients-needed">10</span> clientes</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-bar" style="width: 0%">0%</div>
-                    </div>
-                </div>
-
-             <div class="restaurant-scene">
-                    <div class="combo-display" id="combo-display">
-                        COMBO x<span id="combo-multiplier">1.0</span> 🔥
-                    </div>
-                    
-                    <div class="restaurant-sign">🍽️ Restaurant Rush</div>
-                    
-                    <div class="customers-container" id="customers-container">
-                       <!-- Cliente actual aparecerá aquí -->
-                    </div>
-                    
-                    <div class="restaurant-interior">
-                        <div class="floor-tiles"></div>
-                        <div class="entrance-door">
-                            <div class="door-handle"></div>
-                        </div>
-                        <div class="reception-counter">
-                            <div class="counter-top"></div>
-                        </div>
-                    </div>
-                </div>
 
             <div class="ad-sidebar-right">
                 <div class="ad-placeholder">[ 160x600 ]</div>
