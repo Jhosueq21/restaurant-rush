@@ -270,15 +270,14 @@
             display: flex;
         }
 
-        .ad-banner-top {
-            display: none;
+     .ad-banner-top {
+            background: transparent;
+            min-height: 90px;
+            margin-bottom: 10px;
         }
 
         .ad-placeholder {
-            color: var(--neutral-600);
-            font-size: 14px;
-            text-align: center;
-            padding: 10px;
+            display: none;
         }
 
         .main-container {
@@ -289,9 +288,16 @@
             margin: 0;
         }
 
-            .ad-sidebar-left, .ad-sidebar-right {
-                display: none;
-            }
+        .ad-sidebar-left, .ad-sidebar-right {
+            width: 160px;
+            min-height: 600px;
+        }
+
+        .ad-banner-bottom {
+            background: transparent;
+            min-height: 90px;
+            margin-top: 10px;
+        }
 
      .game-area {
     flex: 1;
@@ -1030,40 +1036,160 @@
             cursor: not-allowed;
         }
 
-        @media (max-width: 1200px) {
+       @media (max-width: 1200px) {
             .ad-sidebar-left, .ad-sidebar-right {
                 display: none;
+            }
+            
+            .main-container {
+                padding: 0 10px;
+            }
+            
+            .game-area {
+                max-width: 100%;
             }
         }
 
         @media (max-width: 768px) {
-            .game-title {
-                font-size: 20px;
+            .ad-banner-top {
+                min-height: 50px;
             }
+            
+            .ad-banner-bottom {
+                min-height: 50px;
+            }
+            
+            .game-area {
+                padding: 10px;
+            }
+            
+            .game-title {
+                font-size: 18px;
+            }
+            
             .game-stats {
                 flex-wrap: wrap;
-                gap: 8px;
+                gap: 6px;
             }
+            
             .stat-item {
-                font-size: 14px;
-                padding: 6px 12px;
+                font-size: 12px;
+                padding: 5px 10px;
             }
-            .timer-display {
+            
+            .stat-icon {
+                font-size: 16px;
+            }
+            
+            .restaurant-scene {
+                min-height: 160px;
+                padding: 10px;
+            }
+            
+            .restaurant-interior {
+                height: 100px;
+            }
+            
+            .entrance-door {
+                width: 50px;
+                height: 70px;
+            }
+            
+            .reception-counter {
+                width: 80px;
+                height: 40px;
+                bottom: 25px;
+            }
+            
+            .counter-top {
+                width: 90px;
+                height: 10px;
+            }
+            
+            .customers-container {
+                bottom: 60px;
+                width: 80px;
+                height: 60px;
+            }
+            
+            .current-customer {
                 font-size: 32px;
             }
-            .serve-button {
-                font-size: 18px;
-                padding: 16px;
+            
+            .customer-bubble {
+                font-size: 16px;
+                padding: 3px 8px;
+                top: -30px;
             }
-            .upgrades-button {
-                width: 60px;
-                height: 60px;
+            
+            .upgrades-panel {
+                padding: 10px;
+            }
+            
+            .upgrades-panel-title {
+                font-size: 14px;
+            }
+            
+            .upgrades-grid {
+                gap: 8px;
+            }
+            
+            .upgrade-mini-card {
+                padding: 8px;
+            }
+            
+            .upgrade-mini-name {
+                font-size: 14px;
+            }
+            
+            .control-panel {
+                padding: 15px;
+            }
+            
+            .timer-display {
                 font-size: 28px;
-                bottom: 20px;
-                right: 20px;
             }
-            .customer {
-                font-size: 36px;
+            
+            .timer-label {
+                font-size: 11px;
+            }
+            
+            .serve-button {
+                font-size: 16px;
+                padding: 14px;
+            }
+            
+            .lives-indicator {
+                font-size: 24px;
+                gap: 6px;
+            }
+            
+            .game-message {
+                font-size: 13px;
+            }
+            
+            .upgrades-button {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .level-progress {
+                margin-bottom: 10px;
+            }
+            
+            .level-info {
+                font-size: 12px;
+            }
+            
+            .progress-bar {
+                height: 18px;
+            }
+            
+            .progress-fill {
+                font-size: 10px;
             }
         }
     </style>
@@ -1147,6 +1273,7 @@
             </div>
 
             <div class="game-area">
+                <div class="game-area">
                 <div class="game-header">
                     <div class="game-title-area">
                         <div class="game-title">🍽️ Restaurant Rush</div>
@@ -1167,6 +1294,63 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="level-progress">
+                    <div class="level-info">
+                        <span>Progreso del nivel</span>
+                        <span><span id="clients-served">0</span>/<span id="clients-needed">10</span> clientes</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-bar" style="width: 0%">0%</div>
+                    </div>
+                </div>
+
+                <div class="restaurant-scene">
+                    <div class="combo-display" id="combo-display">
+                        COMBO x<span id="combo-multiplier">1.0</span> 🔥
+                    </div>
+                    
+                    <div class="restaurant-sign">🍽️ Restaurant Rush</div>
+                    
+                    <div class="customers-container" id="customers-container">
+                       <!-- Cliente actual aparecerá aquí -->
+                    </div>
+                    
+                    <div class="restaurant-interior">
+                        <div class="floor-tiles"></div>
+                        <div class="entrance-door">
+                            <div class="door-handle"></div>
+                        </div>
+                        <div class="reception-counter">
+                            <div class="counter-top"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upgrades-panel">
+                    <div class="upgrades-panel-title">
+                        ⚡ Mejoras Disponibles
+                    </div>
+                    <div class="upgrades-grid" id="upgrades-mini-grid">
+                        <!-- Las mejoras se cargarán aquí -->
+                    </div>
+                </div>
+
+                <div class="control-panel">
+                    <div class="timer-display" id="timer">30:00</div>
+                    <div class="timer-label">tiempo restante para servir</div>
+
+                    <button class="serve-button" id="serve-button">
+                        🍽️ SERVIR PLATO
+                    </button>
+
+                    <div class="lives-indicator" id="lives">
+                        😊 😊 😊
+                    </div>
+
+                    <div class="game-message" id="game-message"></div>
+                </div>
+            </div>
 
                 <div class="level-progress">
                     <div class="level-info">
@@ -1366,7 +1550,7 @@
             }
         }
 
-        async function handleLogin() {
+      async function handleLogin() {
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
             const errorDiv = document.getElementById('login-error');
@@ -1374,13 +1558,16 @@
             try {
                 const { data, error } = await supabase.auth.signInWithPassword({
                     email: email,
-                    password: password
+                    password: password,
+                    options: {
+                        persistSession: true // Mantener sesión
+                    }
                 });
 
                 if (error) throw error;
 
                 await loadUserData(data.user.id);
-                showGame(false); // No mostrar tutorial en login
+                showGame(false);
             } catch (error) {
                 errorDiv.textContent = 'Error: ' + error.message;
                 errorDiv.classList.add('show');
@@ -1931,19 +2118,24 @@ function showNewCustomer() {
             showMessage('¡Mejora comprada! ⚡', 'success');
          }
 
-        supabase.auth.onAuthStateChange((event, session) => {
+     // Verificar sesión guardada al cargar
+        supabase.auth.getSession().then(({ data: { session } }) => {
             if (session) {
                 loadUserData(session.user.id).then(() => {
-                    showGame(false); // No mostrar tutorial
+                    showGame(false);
                 });
             }
         });
 
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            if (session) {
+        // Escuchar cambios de autenticación
+        supabase.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' && session) {
                 loadUserData(session.user.id).then(() => {
-                    showGame(false); // No mostrar tutorial
+                    showGame(false);
                 });
+            } else if (event === 'SIGNED_OUT') {
+                localStorage.clear();
+                location.reload();
             }
         });
     </script>
