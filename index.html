@@ -257,12 +257,13 @@
     box-shadow: 0 8px 20px rgba(16, 163, 127, 0.4);
 }
 
-        .page-wrapper {
+      .page-wrapper {
             display: none;
             flex-direction: column;
             min-height: 100vh;
             width: 100%;
             margin: 0 auto;
+            padding: 10px 0;
         }
 
         .page-wrapper.active {
@@ -285,21 +286,21 @@
             flex: 1;
             gap: 20px;
             padding: 0 20px;
-            margin-bottom: 20px;
+            margin: 0;
         }
 
             .ad-sidebar-left, .ad-sidebar-right {
                 display: none;
             }
 
-       .game-area {
+     .game-area {
     flex: 1;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     background: white;
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    padding: 20px;
+    padding: 15px;
     position: relative;
 }
 
@@ -365,12 +366,12 @@
             font-size: 20px;
         }
 
-        .restaurant-scene {
-            background: linear-gradient(to bottom, #87CEEB 0%, var(--primary-cream) 50%);
+       .restaurant-scene {
+            background: linear-gradient(to bottom, #87CEEB 0%, #D2B48C 60%, #8B7355 100%);
             border-radius: 16px;
             padding: 15px;
-            min-height: 220px;
-            margin-bottom: 15px;
+            min-height: 200px;
+            margin-bottom: 12px;
             position: relative;
             overflow: hidden;
             border: 3px solid var(--primary-tan);
@@ -435,17 +436,17 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 150px;
+            height: 120px;
             background: #F5DEB3;
             border-top: 4px solid #8B4513;
         }
 
-        .reception-counter {
+       .reception-counter {
             position: absolute;
-            bottom: 40px;
-            right: 20%;
-            width: 120px;
-            height: 60px;
+            bottom: 30px;
+            right: 25%;
+            width: 100px;
+            height: 50px;
             background: linear-gradient(to bottom, #8B4513 0%, #654321 100%);
             border-radius: 8px 8px 0 0;
             border: 3px solid #654321;
@@ -455,19 +456,19 @@
             position: absolute;
             top: -5px;
             left: -5px;
-            width: 130px;
-            height: 15px;
+            width: 110px;
+            height: 12px;
             background: #D4A574;
             border-radius: 4px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
-        .entrance-door {
+       .entrance-door {
             position: absolute;
             bottom: 0;
-            left: 10%;
-            width: 80px;
-            height: 120px;
+            left: 15%;
+            width: 60px;
+            height: 90px;
             background: linear-gradient(to right, #654321 0%, #8B4513 50%, #654321 100%);
             border: 3px solid #4A3020;
             border-bottom: none;
@@ -489,13 +490,13 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 40px;
+            height: 30px;
             background: repeating-linear-gradient(
                 90deg,
                 #DEB887 0px,
-                #DEB887 40px,
-                #D2B48C 40px,
-                #D2B48C 80px
+                #DEB887 30px,
+                #D2B48C 30px,
+                #D2B48C 60px
             );
         }
 
@@ -513,13 +514,12 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-       .customers-container {
+     .customers-container {
     position: absolute;
-    bottom: 160px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 150px;
-    height: 100px;
+    bottom: 80px;
+    left: 20%;
+    width: 100px;
+    height: 80px;
     pointer-events: none;
     display: flex;
     align-items: flex-end;
@@ -527,26 +527,28 @@
 }
 
 .current-customer {
-    font-size: 48px;
+    font-size: 40px;
     animation: customerWaiting 1s ease-in-out;
     text-align: center;
+    position: relative;
 }
 
 .customer-bubble {
     position: absolute;
-    top: -25px;
+    top: -35px;
     left: 50%;
     transform: translateX(-50%);
     background: white;
     padding: 4px 10px;
     border-radius: 8px;
-    font-size: 20px;
+    font-size: 18px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border: 2px solid var(--primary-orange);
 }
 
 @keyframes customerWaiting {
     0% {
-        transform: translateX(-100px) scale(0.5);
+        transform: translateX(-50px) scale(0.5);
         opacity: 0;
     }
     100% {
@@ -583,7 +585,7 @@
         transform: translateY(-20px) scale(1.2);
     }
     100% {
-        transform: translateY(0) scale(0.5) translateX(-100px);
+        transform: translateY(0) scale(0.5) translateX(100px);
         opacity: 0;
     }
 }
