@@ -315,62 +315,68 @@
         }
 
         .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid var(--primary-cream);
-        }
+    margin-bottom: 15px;
+}
 
-        .game-title-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.game-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-cream);
+}
 
-        .game-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--primary-orange);
-            text-shadow: 2px 2px 0 var(--primary-cream);
-        }
+.game-title-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        .logout-button {
-            background: var(--neutral-100);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
+.game-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary-orange);
+    text-shadow: 2px 2px 0 var(--primary-cream);
+}
 
-        .logout-button:hover {
-            background: var(--danger-red);
-            color: white;
-        }
+.logout-button {
+    background: var(--neutral-100);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+}
 
-        .game-stats {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
+.logout-button:hover {
+    background: var(--danger-red);
+    color: white;
+}
 
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary-cream);
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-weight: 600;
-        }
+.game-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
 
-        .stat-icon {
-            font-size: 20px;
-        }
+.stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--primary-cream);
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.stat-icon {
+    font-size: 18px;
+}
 
        .restaurant-scene {
             background: linear-gradient(to bottom, #87CEEB 0%, #D2B48C 60%, #8B7355 100%);
@@ -663,92 +669,51 @@
 }
 
 @media (max-width: 768px) {
-    .upgrades-grid {
+    .game-title {
+        font-size: 18px;
+    }
+    
+    .game-stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 6px;
     }
     
-    .upgrade-mini-card {
-        padding: 8px;
+    .stat-item {
+        font-size: 11px;
+        padding: 6px 8px;
     }
     
-    .upgrade-mini-name {
+    .stat-icon {
+        font-size: 16px;
+    }
+    
+    .control-panel {
+        padding: 12px;
+    }
+    
+    .timer-display {
+        font-size: 24px;
+    }
+    
+    .timer-label {
+        font-size: 10px;
+    }
+    
+    .serve-button {
+        font-size: 14px;
+        padding: 12px;
+    }
+    
+    .lives-indicator {
+        font-size: 20px;
+        gap: 6px;
+        margin-top: 10px;
+    }
+    
+    .game-message {
         font-size: 12px;
     }
 }
-
-        .control-panel {
-            background: var(--primary-cream);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 20px;
-        }
-
-        .timer-display {
-            font-family: 'Poppins', sans-serif;
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--primary-orange);
-            text-align: center;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-        }
-
-        .timer-label {
-            font-size: 14px;
-            color: var(--neutral-600);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .serve-button {
-            width: 100%;
-            background: linear-gradient(135deg, var(--warning-yellow) 0%, var(--primary-orange) 100%);
-            border: none;
-            padding: 20px;
-            font-size: 22px;
-            font-weight: 700;
-            color: white;
-            border-radius: 16px;
-            cursor: pointer;
-            box-shadow: 0 8px 30px rgba(232, 123, 53, 0.4);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Poppins', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .serve-button:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(232, 123, 53, 0.6);
-        }
-
-        .serve-button:active {
-            transform: translateY(-2px) scale(0.98);
-        }
-
-        .serve-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .lives-indicator {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-            font-size: 32px;
-        }
-
-        .game-message {
-            text-align: center;
-            font-size: 18px;
-            color: var(--neutral-600);
-            margin-top: 15px;
-            min-height: 25px;
-            font-weight: 600;
-        }
 
         .level-progress {
             margin-bottom: 20px;
@@ -1285,11 +1250,11 @@
 
             <div class="game-area">
                 <div class="game-header">
-                    <div class="game-title-area">
+                    <div class="game-title-section">
                         <div class="game-title">🍽️ Restaurant Rush</div>
-                        <button class="logout-button" onclick="handleLogout()">Salir</button>
+                    <button class="logout-button" onclick="handleLogout()">Salir</button>
                     </div>
-                    <div class="game-stats">
+                        <div class="game-stats">
                         <div class="stat-item">
                             <span class="stat-icon">👤</span>
                             <span id="username-display">Usuario</span>
