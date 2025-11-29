@@ -356,22 +356,21 @@
     color: white;
 }
 
-.game-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-}
-
-.stat-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background: var(--primary-cream);
-    padding: 8px 10px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 13px;
+.serve-button {
+    width: 100%;
+    background: linear-gradient(135deg, var(--warning-yellow) 0%, var(--primary-orange) 100%);
+    border: none;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(232, 123, 53, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .stat-icon {
@@ -526,10 +525,10 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-     .customers-container {
+.customers-container {
     position: absolute;
     bottom: 80px;
-    left: 20%;
+    left: -10%;
     width: 100px;
     height: 80px;
     pointer-events: none;
@@ -560,7 +559,7 @@
 
 @keyframes customerWaiting {
     0% {
-        transform: translateX(-50px) scale(0.5);
+        transform: translateX(-80px) scale(0.5);
         opacity: 0;
     }
     100% {
@@ -579,7 +578,7 @@
         opacity: 1;
     }
     100% {
-        transform: translateX(100px) scale(0.5);
+        transform: translateX(150px) scale(0.5);
         opacity: 0;
     }
 }
@@ -597,7 +596,7 @@
         transform: translateY(-20px) scale(1.2);
     }
     100% {
-        transform: translateY(0) scale(0.5) translateX(100px);
+        transform: translateY(0) scale(0.5) translateX(150px);
         opacity: 0;
     }
 }
@@ -1082,21 +1081,22 @@
                 height: 10px;
             }
             
-            .customers-container {
-                bottom: 60px;
-                width: 80px;
-                height: 60px;
-            }
-            
-            .current-customer {
-                font-size: 32px;
-            }
-            
-            .customer-bubble {
-                font-size: 16px;
-                padding: 3px 8px;
-                top: -30px;
-            }
+           .customers-container {
+    bottom: 60px;
+    left: -15%;
+    width: 80px;
+    height: 60px;
+}
+
+.current-customer {
+    font-size: 32px;
+}
+
+.customer-bubble {
+    font-size: 16px;
+    padding: 3px 8px;
+    top: -30px;
+}
             
             .upgrades-panel {
                 padding: 10px;
@@ -1302,6 +1302,19 @@
                     </div>
                 </div>
 
+                <div class="control-panel">
+                    <div class="timer-display" id="timer">30:00</div>
+                    <div class="timer-label">tiempo restante para servir</div>
+
+                    <button class="serve-button" id="serve-button">
+                        🍽️ SERVIR PLATO
+                    </button>
+
+                    <div class="game-message" id="game-message"></div>
+                </div>
+
+
+
                 <div class="upgrades-panel">
                     <div class="upgrades-panel-title">
                         ⚡ Mejoras Disponibles
@@ -1311,20 +1324,6 @@
                     </div>
                 </div>
 
-                <div class="control-panel">
-                    <div class="timer-display" id="timer">30:00</div>
-                    <div class="timer-label">tiempo restante para servir</div>
-
-                    <button class="serve-button" id="serve-button">
-                        🍽️ SERVIR PLATO
-                    </button>
-
-                    <div class="lives-indicator" id="lives">
-                        😊 😊 😊
-                    </div>
-
-                    <div class="game-message" id="game-message"></div>
-                </div>
             </div>
             <div class="ad-sidebar-right">
                 <div class="ad-placeholder">[ 160x600 ]</div>
