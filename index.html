@@ -668,18 +668,14 @@
 }
 
 @media (max-width: 768px) {
-    .game-title {
-        font-size: 18px;
-    }
-    
     .game-stats {
-        grid-template-columns: repeat(2, 1fr);
+        flex-wrap: wrap;
         gap: 6px;
     }
     
     .stat-item {
         font-size: 11px;
-        padding: 6px 8px;
+        padding: 6px 10px;
     }
     
     .stat-icon {
@@ -687,31 +683,140 @@
     }
     
     .control-panel {
-        padding: 12px;
+        padding: 15px;
     }
     
     .timer-display {
-        font-size: 24px;
-    }
-    
-    .timer-label {
-        font-size: 10px;
-    }
-    
-    .serve-button {
-        font-size: 14px;
+        font-size: 28px;
         padding: 12px;
     }
     
+    .timer-label {
+        font-size: 11px;
+    }
+    
+    .serve-button {
+        font-size: 16px;
+        padding: 14px;
+    }
+    
     .lives-indicator {
-        font-size: 20px;
-        gap: 6px;
-        margin-top: 10px;
+        font-size: 22px;
+        gap: 8px;
+        margin-top: 12px;
     }
     
     .game-message {
-        font-size: 12px;
+        font-size: 13px;
     }
+    
+    .upgrades-button {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+    
+    .upgrades-button span:first-child {
+        font-size: 18px;
+    }
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary-cream);
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 13px;
+    border: 2px solid var(--primary-tan);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.stat-icon {
+    font-size: 18px;
+}
+    
+   .control-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 3px solid var(--primary-tan);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.timer-display {
+    font-family: 'Poppins', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--primary-orange);
+    text-align: center;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    background: var(--primary-cream);
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid var(--primary-tan);
+}
+
+.timer-label {
+    font-size: 13px;
+    color: var(--neutral-600);
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.serve-button {
+    width: 100%;
+    background: linear-gradient(135deg, var(--warning-yellow) 0%, var(--primary-orange) 100%);
+    border: none;
+    padding: 18px;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(232, 123, 53, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.serve-button:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(232, 123, 53, 0.6);
+}
+
+.serve-button:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.serve-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.lives-indicator {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+    font-size: 28px;
+}
+
+.game-message {
+    text-align: center;
+    font-size: 15px;
+    color: var(--neutral-600);
+    margin-top: 12px;
+    min-height: 22px;
+    font-weight: 600;
 }
 
         .level-progress {
@@ -772,25 +877,30 @@
             50% { transform: scale(1.1); }
         }
 
-        .upgrades-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--success-green) 0%, var(--info-blue) 100%);
-            border: none;
-            border-radius: 50%;
-            font-size: 32px;
-            cursor: pointer;
-            box-shadow: 0 8px 30px rgba(16, 163, 127, 0.4);
-            transition: all 0.3s;
-            z-index: 100;
-        }
+       .upgrades-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, var(--success-green) 0%, var(--info-blue) 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(16, 163, 127, 0.4);
+    transition: all 0.3s;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-        .upgrades-button:hover {
-            transform: scale(1.1) rotate(15deg);
-        }
+.upgrades-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(16, 163, 127, 0.6);
+}
 
         .upgrades-screen {
             display: none;
@@ -1313,17 +1423,6 @@
                     <div class="game-message" id="game-message"></div>
                 </div>
 
-
-
-                <div class="upgrades-panel">
-                    <div class="upgrades-panel-title">
-                        ⚡ Mejoras Disponibles
-                    </div>
-                    <div class="upgrades-grid" id="upgrades-mini-grid">
-                        <!-- Las mejoras se cargarán aquí -->
-                    </div>
-                </div>
-
             </div>
             <div class="ad-sidebar-right">
                 <div class="ad-placeholder">[ 160x600 ]</div>
@@ -1334,7 +1433,10 @@
             <div class="ad-placeholder">[ Espacio para banner 728x90 ]</div>
         </div>
 
-        <button class="upgrades-button" onclick="openUpgrades()">⚡</button>
+     <button class="upgrades-button" onclick="openUpgrades()">
+    <span style="font-size: 20px;">⚡</span>
+    <span>Mejoras</span>
+</button>
     </div>
 
     <!-- PANTALLA DE MEJORAS -->
