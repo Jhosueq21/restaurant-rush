@@ -2225,10 +2225,10 @@ function showNewCustomer() {
             } else if (event === 'SIGNED_OUT') {
                 localStorage.clear();
                 location.reload();
-            }
+              }
         });
 
-async function gameOver() {
+        async function gameOver() {
             gameState.isPlaying = false;
             clearInterval(gameState.timerInterval);
 
