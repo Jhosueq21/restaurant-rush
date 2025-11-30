@@ -2353,13 +2353,10 @@ l.parentNode.insertBefore(s, l);
         });
     }
 
-    loadHilltopForPosition(position, container) {
+loadHilltopForPosition(position, container) {
         container.innerHTML = '';
-        const scriptWrapper = document.createElement('div');
-        scriptWrapper.innerHTML = `<script>${this.hilltopCodes[position]}</script>`;
-        const scriptElement = scriptWrapper.querySelector('script');
         const newScript = document.createElement('script');
-        newScript.textContent = scriptElement.textContent;
+        newScript.textContent = this.hilltopCodes[position];
         container.appendChild(newScript);
         console.log(`✅ HilltopAds cargado en ${position}`);
     }
