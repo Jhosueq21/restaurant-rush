@@ -2252,7 +2252,7 @@ function showNewCustomer() {
 
 class AdWaterfall {
     constructor() {
-        this.adsenseTimeout = 3000; // 3 segundos para AdSense
+        this.adsenseTimeout = 3000;
         this.hilltopCodes = {
             top: `(function(xck){
 var d = document,
@@ -2288,7 +2288,6 @@ l.parentNode.insertBefore(s, l);
     }
 
     init() {
-        // Esperar a que AdSense esté listo
         if (typeof googletag === 'undefined' && typeof adsbygoogle === 'undefined') {
             console.log('⏳ Esperando AdSense...');
             setTimeout(() => this.checkAdSense(), this.adsenseTimeout);
@@ -2309,15 +2308,12 @@ l.parentNode.insertBefore(s, l);
 
     loadAdSense() {
         console.log('🎯 Intentando cargar AdSense...');
-        
-        // Crear placeholders para AdSense
         const positions = ['top', 'left', 'right'];
         
         positions.forEach(pos => {
             const container = document.getElementById(`ad-${pos}-container`);
             if (!container) return;
 
-            // Crear div para el anuncio de AdSense
             const adDiv = document.createElement('ins');
             adDiv.className = 'adsbygoogle';
             adDiv.style.display = 'block';
@@ -2328,11 +2324,9 @@ l.parentNode.insertBefore(s, l);
             
             container.appendChild(adDiv);
 
-            // Intentar cargar el anuncio
             try {
                 (adsbygoogle = window.adsbygoogle || []).push({});
                 
-                // Verificar si se cargó después de un timeout
                 setTimeout(() => {
                     if (adDiv.innerHTML === '') {
                         console.log(`⚠️ AdSense vacío en ${pos}, cargando HilltopAds`);
@@ -2350,42 +2344,32 @@ l.parentNode.insertBefore(s, l);
 
     loadHilltopAds() {
         console.log('🏔️ Cargando HilltopAds...');
-        
         const positions = ['top', 'left', 'right'];
         
         positions.forEach(pos => {
             const container = document.getElementById(`ad-${pos}-container`);
             if (!container) return;
-            
             this.loadHilltopForPosition(pos, container);
         });
     }
 
-  loadHilltopForPosition(position, container) {
-        // Limpiar contenedor
+    loadHilltopForPosition(position, container) {
         container.innerHTML = '';
-        
-        // Crear script element
         const scriptWrapper = document.createElement('div');
         scriptWrapper.innerHTML = `<script>${this.hilltopCodes[position]}</script>`;
-        
-        // Insertar el script
         const scriptElement = scriptWrapper.querySelector('script');
         const newScript = document.createElement('script');
         newScript.textContent = scriptElement.textContent;
-        
         container.appendChild(newScript);
-        
         console.log(`✅ HilltopAds cargado en ${position}`);
     }
 }
 
-// Inicializar waterfall cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
     const waterfall = new AdWaterfall();
     waterfall.init();
 });
-        
+
     </script>
 </body>
 </html>
