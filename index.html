@@ -2228,6 +2228,24 @@ function showNewCustomer() {
             }
         });
 
+async function gameOver() {
+            gameState.isPlaying = false;
+            clearInterval(gameState.timerInterval);
+
+            await saveGameSession();
+
+            const playTimeMinutes = gameState.totalPlayTime / 60;
+            let cooldownMinutes = Math.floor((playTimeMinutes / 60) * 2);
+            cooldownMinutes = Math.min(cooldownMinutes, GAME_CONFIG.MAX_COOLDOWN);
+            cooldownMinutes = Math.max(cooldownMinutes, 1);
+
+            const cooldownEnd = Date.now() + (cooldownMinutes * 60 * 1000);
+            localStorage.setItem('cooldownEnd', cooldownEnd.toString());
+            localStorage.setItem('showTutorialAfterCooldown', 'true');
+
+            showGameOver(false);
+        }
+
 // ============================================
 // SISTEMA DE WATERFALL PUBLICITARIO
 // ============================================
